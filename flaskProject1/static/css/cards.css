@@ -1,0 +1,37 @@
+.blue {
+    float: right;
+    background-color: blue;
+}
+
+.green {
+    float: right;
+    background-color: green;
+}
+
+.category {
+    float: right;
+}
+
+.status, .card-title, .col {
+    margin: 0;
+}
+
+.card {
+    background-color: rgb(229, 229, 229);
+}
+
+.username {
+    font-size: small;
+}
+
+.card {
+    margin: 0% 1% 1% 1%;
+}
+
+.ingredients-text {
+    margin: 0;
+}
+
+.row {
+    margin-top: 1%;
+}
