@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif, 'Helvetica Neue', Helvetica;
+    line-height: 1.6;
+    color: #333;
+}
+
+header {
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    /* Increased padding for larger screens */
+    margin-bottom: 20px;
+}
+
+header h1 {
+    display: block;
+    /* changed from inline to block for better control */
+    font-size: 24px;
+    /* Explicit font size */
+}
+
+main {
+    margin: 20px;
+    padding: 10px;
+}
+
+main h2,
+main h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    header {
+        padding: 10px;
+    }
+
+    main {
+        margin: 10px;
+        padding: 5px;
+    }
+}
