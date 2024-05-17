@@ -32,9 +32,20 @@ def login():
             return redirect(url_for('auth.login'))
 
 
-@BP.route("/account", methods=['GET', 'POST'])
+@BP.route("/account", methods=['GET'])
 def account():
-    return render_template("account.html")
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect(url_for('auth.login'))
+
+    user = AccountDimension.query.filter_by(user_id=user_id).first()
+    if not user:
+        return redirect(url_for('auth.login'))  # Redirect to login if user not found
+
+    # Fetch all recipes associated with the user
+    recipes = RecipeDimension.query.filter_by(user_id=user_id).all()
+    return render_template("account.html", user=user, recipes=recipes)
+
 
 
 @BP.route("/Main", methods=['GET', 'POST'])
