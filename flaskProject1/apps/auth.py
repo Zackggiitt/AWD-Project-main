@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template, request, url_for, redirect, session, jsonify
 import json
 from werkzeug.security import check_password_hash
-
+from werkzeug.security import check_password_hash, generate_password_hash
 from apps.models import AccountDimension, RecipeDimension
 from apps import db
 from apps.form import LoginForm
-
+from flask import flash
 BP = Blueprint('auth', __name__, url_prefix='/auth')
 
 
@@ -18,19 +18,17 @@ def login():
         if form.validate():
             username = form.username.data
             password = form.password.data
-            checkbox = request.form.get("checkbox")
             user = AccountDimension.query.filter_by(username=username).first()
-            if not user:
+            if not user or not check_password_hash(user.password, password):
+                flash('Invalid username or password', 'error')
                 return redirect(url_for('auth.login'))
-            if user.password == password:
+            else:
                 session["username"] = username
                 session["user_id"] = user.user_id
-                recipes = RecipeDimension.query.all()
+                flash('You were successfully logged in', 'success')
                 return redirect(url_for('auth.main'))
-            else:
-                return redirect(url_for('auth.login'))
-            pass
         else:
+            flash('Login failed. Please check your credentials and try again.', 'error')
             return redirect(url_for('auth.login'))
 
 
